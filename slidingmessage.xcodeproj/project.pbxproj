@@ -15,7 +15,6 @@
 		AB3DDEEE1B5B36B10075C9BF /* XButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3DDEEB1B5B36B10075C9BF /* XButton.png */; };
 		AB3DDEEF1B5B36B10075C9BF /* XButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3DDEEC1B5B36B10075C9BF /* XButton@2x.png */; };
 		AB3DDEF01B5B36B10075C9BF /* XButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3DDEED1B5B36B10075C9BF /* XButton@3x.png */; };
-		AB3DDEF21B5B3EE60075C9BF /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = AB3DDEF11B5B3EE60075C9BF /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +39,7 @@
 		AB3DDEEB1B5B36B10075C9BF /* XButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XButton.png; sourceTree = "<group>"; };
 		AB3DDEEC1B5B36B10075C9BF /* XButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XButton@2x.png"; sourceTree = "<group>"; };
 		AB3DDEED1B5B36B10075C9BF /* XButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XButton@3x.png"; sourceTree = "<group>"; };
-		AB3DDEF11B5B3EE60075C9BF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		AB3DDEF11B5B3EE60075C9BF /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; fileEncoding = 4; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,7 +229,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB3DDEF21B5B3EE60075C9BF /* README.md in Sources */,
 				AB3DDEB91B5B33E70075C9BF /* ErrorView.swift in Sources */,
 				AB3DDEBA1B5B33E70075C9BF /* LabelWithAutoWrap.swift in Sources */,
 			);

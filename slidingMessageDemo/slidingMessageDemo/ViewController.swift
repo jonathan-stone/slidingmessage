@@ -20,7 +20,12 @@ class ViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.errorView = ErrorView(parentView: self.view, autoHideDelaySeconds: 5, backgroundColor: UIColor.redColor(), foregroundColor: UIColor.whiteColor(), desiredHeight: 100, positionBelowControl: button)
+        self.errorView = ErrorView(parentView: self.view,
+            autoHideDelaySeconds: 5,
+            backgroundColor: UIColor.redColor(),
+            foregroundColor: UIColor.whiteColor(),
+            desiredHeight: 100,
+            positionBelowControl: button)
     }
 
     @IBAction func buttonPressed(sender: AnyObject)
