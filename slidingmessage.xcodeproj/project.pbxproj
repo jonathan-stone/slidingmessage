@@ -10,6 +10,11 @@
 		AB3DDE9F1B5B33310075C9BF /* slidingmessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AB3DDE9E1B5B33310075C9BF /* slidingmessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB3DDEA51B5B33310075C9BF /* slidingmessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB3DDE991B5B33300075C9BF /* slidingmessage.framework */; };
 		AB3DDEAC1B5B33310075C9BF /* slidingmessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DDEAB1B5B33310075C9BF /* slidingmessageTests.swift */; };
+		AB3DDEB91B5B33E70075C9BF /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DDEB71B5B33E70075C9BF /* ErrorView.swift */; };
+		AB3DDEBA1B5B33E70075C9BF /* LabelWithAutoWrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DDEB81B5B33E70075C9BF /* LabelWithAutoWrap.swift */; };
+		AB3DDEEE1B5B36B10075C9BF /* XButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3DDEEB1B5B36B10075C9BF /* XButton.png */; };
+		AB3DDEEF1B5B36B10075C9BF /* XButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3DDEEC1B5B36B10075C9BF /* XButton@2x.png */; };
+		AB3DDEF01B5B36B10075C9BF /* XButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3DDEED1B5B36B10075C9BF /* XButton@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 		AB3DDEA41B5B33310075C9BF /* slidingmessageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slidingmessageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3DDEAA1B5B33310075C9BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3DDEAB1B5B33310075C9BF /* slidingmessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slidingmessageTests.swift; sourceTree = "<group>"; };
+		AB3DDEB71B5B33E70075C9BF /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		AB3DDEB81B5B33E70075C9BF /* LabelWithAutoWrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelWithAutoWrap.swift; sourceTree = "<group>"; };
+		AB3DDEEB1B5B36B10075C9BF /* XButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XButton.png; sourceTree = "<group>"; };
+		AB3DDEEC1B5B36B10075C9BF /* XButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XButton@2x.png"; sourceTree = "<group>"; };
+		AB3DDEED1B5B36B10075C9BF /* XButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XButton@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +81,8 @@
 		AB3DDE9B1B5B33300075C9BF /* slidingmessage */ = {
 			isa = PBXGroup;
 			children = (
+				AB3DDEB71B5B33E70075C9BF /* ErrorView.swift */,
+				AB3DDEB81B5B33E70075C9BF /* LabelWithAutoWrap.swift */,
 				AB3DDE9E1B5B33310075C9BF /* slidingmessage.h */,
 				AB3DDE9C1B5B33300075C9BF /* Supporting Files */,
 			);
@@ -80,6 +92,9 @@
 		AB3DDE9C1B5B33300075C9BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AB3DDEEB1B5B36B10075C9BF /* XButton.png */,
+				AB3DDEEC1B5B36B10075C9BF /* XButton@2x.png */,
+				AB3DDEED1B5B36B10075C9BF /* XButton@3x.png */,
 				AB3DDE9D1B5B33300075C9BF /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -192,6 +207,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB3DDEEE1B5B36B10075C9BF /* XButton.png in Resources */,
+				AB3DDEF01B5B36B10075C9BF /* XButton@3x.png in Resources */,
+				AB3DDEEF1B5B36B10075C9BF /* XButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +227,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB3DDEB91B5B33E70075C9BF /* ErrorView.swift in Sources */,
+				AB3DDEBA1B5B33E70075C9BF /* LabelWithAutoWrap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,4 +4,7 @@
    <FileRef
       location = "self:slidingmessage.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../slidingMessageDemo/slidingMessageDemo.xcodeproj">
+   </FileRef>
 </Workspace>
