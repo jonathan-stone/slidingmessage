@@ -12,17 +12,20 @@ import slidingmessage
 
 class ViewController: UIViewController
 {
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var button: UIButton!
+
     private var errorView: slidingmessage.ErrorView?
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.errorView = ErrorView(parentView: self.view, autoHideDelaySeconds: 5, backgroundColor: UIColor.redColor(), foregroundColor: UIColor.whiteColor(), desiredHeight: 100, positionBelowControl: nil)
+        self.errorView = ErrorView(parentView: self.view, autoHideDelaySeconds: 5, backgroundColor: UIColor.redColor(), foregroundColor: UIColor.whiteColor(), desiredHeight: 100, positionBelowControl: button)
     }
 
-    override func viewDidAppear(animated: Bool)
+    @IBAction func buttonPressed(sender: AnyObject)
     {
-        self.errorView?.showErrorView("Wow! A message!")
+        self.errorView?.showErrorView(self.textField.text)
     }
 
     override func didReceiveMemoryWarning() {

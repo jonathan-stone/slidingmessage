@@ -107,8 +107,12 @@ public class ErrorView: NSObject
         self.errorMessageLabel = LabelWithAutoWrap()
         self.view.addSubview(errorMessageLabel)
 
-        self.imageView = UIImageView(image: UIImage(named: "XButton"))
-        self.view.addSubview(imageView)
+        //        self.imageView = UIImageView(image: UIImage(named: "XButton"))
+        if let image = loadCloseButtonImage()
+        {
+            self.imageView = UIImageView(image: image)
+            self.view.addSubview(imageView)
+        }
 
         // Button must be added last. Covers entire view.
         self.errorMessageDismissButton = makeDismissButton()
@@ -117,6 +121,13 @@ public class ErrorView: NSObject
         // Add constraints
         setConstraints()
         parentView.layoutIfNeeded()
+    }
+
+    private func loadCloseButtonImage()->UIImage?
+    {
+        let frameworkBundle = NSBundle(forClass: self.dynamicType)
+//        let image = frameworkBundle.pathForResource(name: "XButton", ofType: "png")
+        return UIImage(named: "XButton", inBundle: frameworkBundle, compatibleWithTraitCollection: nil)
     }
 
     private func makeDismissButton()->UIButton
