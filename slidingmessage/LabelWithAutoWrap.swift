@@ -37,7 +37,7 @@ class LabelWithAutoWrap: UILabel
 
     private func applyPropertySettings()
     {
-        self.lineBreakMode = NSLineBreakMode.ByWordWrapping // TODO: How to do this only once?
+        self.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.numberOfLines = 0
         self.font = UIFont.systemFontOfSize(15)
     }

@@ -83,9 +83,9 @@
 		AB3DDE9B1B5B33300075C9BF /* slidingmessage */ = {
 			isa = PBXGroup;
 			children = (
+				AB3DDEB71B5B33E70075C9BF /* ErrorView.swift */,
 				AB3DDEF11B5B3EE60075C9BF /* README.md */,
 				AB3DDEF31B5B454D0075C9BF /* LICENSE.txt */,
-				AB3DDEB71B5B33E70075C9BF /* ErrorView.swift */,
 				AB3DDEB81B5B33E70075C9BF /* LabelWithAutoWrap.swift */,
 				AB3DDE9E1B5B33310075C9BF /* slidingmessage.h */,
 				AB3DDE9C1B5B33300075C9BF /* Supporting Files */,
