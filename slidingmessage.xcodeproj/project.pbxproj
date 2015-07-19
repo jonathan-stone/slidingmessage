@@ -40,6 +40,7 @@
 		AB3DDEEC1B5B36B10075C9BF /* XButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XButton@2x.png"; sourceTree = "<group>"; };
 		AB3DDEED1B5B36B10075C9BF /* XButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XButton@3x.png"; sourceTree = "<group>"; };
 		AB3DDEF11B5B3EE60075C9BF /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; fileEncoding = 4; path = README.md; sourceTree = SOURCE_ROOT; };
+		AB3DDEF31B5B454D0075C9BF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				AB3DDEF11B5B3EE60075C9BF /* README.md */,
+				AB3DDEF31B5B454D0075C9BF /* LICENSE.txt */,
 				AB3DDEB71B5B33E70075C9BF /* ErrorView.swift */,
 				AB3DDEB81B5B33E70075C9BF /* LabelWithAutoWrap.swift */,
 				AB3DDE9E1B5B33310075C9BF /* slidingmessage.h */,
