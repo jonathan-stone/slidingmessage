@@ -9,18 +9,25 @@ slidingmessage is a simple message view that slides down from the top of its par
 - Optionally closes automatically after N seconds.
 
 
-Example usage:
+##Example usage:
+--------------
+
+###Creating the control:
 ```swift
-// Creating the control:
 self.errorView = ErrorView(parentView: self.view,
 autoHideDelaySeconds: 5,
 backgroundColor: UIColor.redColor(),
 foregroundColor: UIColor.whiteColor(),
 desiredHeight: 100,
 positionBelowControl: button)   // "button" is any UIControl
+```
 
+###Showing the message:
+-------------------
+```swift
 @IBAction func buttonPressed(sender: AnyObject)
 {
     self.errorView?.showErrorView(self.textField.text)
 }
+```
 
