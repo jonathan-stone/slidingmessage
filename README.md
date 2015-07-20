@@ -14,7 +14,7 @@ slidingmessage is a simple message view that slides down from the top of its par
 
 ###Creating the control:
 ```swift
-    self.errorView = ErrorView(parentView: self.view,
+self.errorView = ErrorView(parentView: self.view,
     autoHideDelaySeconds: 5,
     backgroundColor: UIColor.redColor(),
     foregroundColor: UIColor.whiteColor(),
