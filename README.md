@@ -14,13 +14,13 @@ slidingmessage is a simple message view that slides down from the top of its par
 
 ###Creating the control:
 ```swift
-self.errorView = ErrorView(parentView: self.view,
-autoHideDelaySeconds: 5,
-backgroundColor: UIColor.redColor(),
-foregroundColor: UIColor.whiteColor(),
-minimumHeight: 100,
-positionBelowControl: button,   // "button" is any UIControl
-font: UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
+    self.errorView = ErrorView(parentView: self.view,
+    autoHideDelaySeconds: 5,
+    backgroundColor: UIColor.redColor(),
+    foregroundColor: UIColor.whiteColor(),
+    minimumHeight: 100,
+    positionBelowControl: button,   // "button" is any UIControl
+    font: UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
 ```
 
 ###Showing the message:
