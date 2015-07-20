@@ -18,8 +18,9 @@ self.errorView = ErrorView(parentView: self.view,
 autoHideDelaySeconds: 5,
 backgroundColor: UIColor.redColor(),
 foregroundColor: UIColor.whiteColor(),
-desiredHeight: 100,
-positionBelowControl: button)   // "button" is any UIControl
+minimumHeight: 100,
+positionBelowControl: button,   // "button" is any UIControl
+font: UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
 ```
 
 ###Showing the message:
