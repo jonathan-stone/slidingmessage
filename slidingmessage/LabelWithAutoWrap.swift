@@ -10,6 +10,7 @@ import UIKit
 
 class LabelWithAutoWrap: UILabel
 {
+    var userFont: UIFont?
 
     required init(coder aDecoder: NSCoder)
     {
@@ -23,10 +24,18 @@ class LabelWithAutoWrap: UILabel
         self.applyPropertySettings()
     }
 
-    override  func awakeFromNib() {
+    convenience init(font: UIFont)
+    {
+        let placeholderRect = CGRect(x:0, y:0, width: 20, height:14)
+        self.init(frame: placeholderRect)    // Caller is expected to use autolayout or resize the control.
+        self.userFont = font
+        applyFont()
+    }
+
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
         self.applyPropertySettings()
-        
     }
 
     override func layoutSubviews()
@@ -35,10 +44,23 @@ class LabelWithAutoWrap: UILabel
         self.preferredMaxLayoutWidth = self.bounds.size.width;
     }
 
+    private func applyFont()
+    {
+        if let fontToUse = self.userFont
+        {
+            self.font = fontToUse
+        }
+        else
+        {
+            self.font = UIFont.systemFontOfSize(15)
+        }
+    }
+
     private func applyPropertySettings()
     {
         self.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.numberOfLines = 0
-        self.font = UIFont.systemFontOfSize(15)
+
+        applyFont()
     }
 }

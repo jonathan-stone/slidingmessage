@@ -56,9 +56,6 @@ public class ErrorView: NSObject
             var errLabel = self.errorMessageLabel
             errLabel.text = message
 
-            // Clear any previous animations:
-            //            errView.layer.removeAllAnimations()
-
             // Begin with message out of view, above the top edge of the parent view:
             self.parentView.layoutIfNeeded()
             self.mainViewTopSpaceConstraint.constant = -self.view.frame.size.height
@@ -101,13 +98,11 @@ public class ErrorView: NSObject
     private func initSubviews()
     {
         self.view = UIView()
-//        self.view.setTranslatesAutoresizingMaskIntoConstraints(false)
         parentView.addSubview(self.view)
 
-        self.errorMessageLabel = LabelWithAutoWrap()
+        self.errorMessageLabel = LabelWithAutoWrap(font: UIFont.systemFontOfSize(20))
         self.view.addSubview(errorMessageLabel)
 
-        //        self.imageView = UIImageView(image: UIImage(named: "XButton"))
         if let image = loadCloseButtonImage()
         {
             self.imageView = UIImageView(image: image)
@@ -126,7 +121,6 @@ public class ErrorView: NSObject
     private func loadCloseButtonImage()->UIImage?
     {
         let frameworkBundle = NSBundle(forClass: self.dynamicType)
-//        let image = frameworkBundle.pathForResource(name: "XButton", ofType: "png")
         return UIImage(named: "XButton", inBundle: frameworkBundle, compatibleWithTraitCollection: nil)
     }
 
@@ -140,7 +134,6 @@ public class ErrorView: NSObject
     private func setConstraints()
     {
         var views = [
-//            "parentView": parentView,
             "view": view,
             "label": errorMessageLabel,
             "image": imageView,
@@ -171,8 +164,6 @@ public class ErrorView: NSObject
         let imageTopConstraint = NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
         view.addConstraint(imageTopConstraint)
 
-//        let labelVertConstraints = NSLayoutConstraint(item: errorMessageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-
         let labelVertConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[label]-|",
             options: NSLayoutFormatOptions.allZeros,
             metrics: nil, views: views)
@@ -190,11 +181,6 @@ public class ErrorView: NSObject
         let buttonVertConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[button]|",
             options: NSLayoutFormatOptions.allZeros, metrics: nil, views: views)
         view.addConstraints(buttonVertConstraints)
-
-
-//        var labelVConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[label]-|", options: NSLayoutFormatOptions.allZeros,
-//            metrics: nil, views: views)
-//        view.addConstraints(labelVConstraint)
     }
 
     func errorMessageDismissButtonPressed(sender: UIButton!)
@@ -235,7 +221,7 @@ public class ErrorView: NSObject
             options: UIViewAnimationOptions.CurveEaseInOut,
 //            options: UIViewAnimationOptions.TransitionCrossDissolve,
             animations: { () -> Void in
-//                self.mainViewTopSpaceConstraint.constant = -self.view.frame.size.height
+                //                self.mainViewTopSpaceConstraint.constant = -self.view.frame.size.height // Use this to slide up and away instead of fading out
                 self.view.alpha = 0
 //                self.view.layoutIfNeeded()
             }, completion: {(done)->Void in
