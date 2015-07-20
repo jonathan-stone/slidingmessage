@@ -24,7 +24,7 @@ class LabelWithAutoWrap: UILabel
         self.applyPropertySettings()
     }
 
-    convenience init(font: UIFont)
+    convenience init(font: UIFont?)
     {
         let placeholderRect = CGRect(x:0, y:0, width: 20, height:14)
         self.init(frame: placeholderRect)    // Caller is expected to use autolayout or resize the control.

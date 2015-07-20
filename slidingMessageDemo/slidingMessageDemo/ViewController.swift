@@ -24,8 +24,9 @@ class ViewController: UIViewController
             autoHideDelaySeconds: 5,
             backgroundColor: UIColor.redColor(),
             foregroundColor: UIColor.whiteColor(),
-            desiredHeight: 100,
-            positionBelowControl: button)
+            minimumHeight: 100,
+            positionBelowControl: button,
+            font: UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
     }
 
     @IBAction func buttonPressed(sender: AnyObject)

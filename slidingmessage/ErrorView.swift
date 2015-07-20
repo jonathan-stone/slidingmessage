@@ -17,6 +17,7 @@ public class ErrorView: NSObject
     var errorMessageDismissButton: UIButton!
     var imageView: UIImageView!
     var positionBelowControl: UIView?
+    var font: UIFont?
 
     // Constraints:
     var mainViewTopSpaceConstraint: NSLayoutConstraint!
@@ -24,25 +25,26 @@ public class ErrorView: NSObject
     // Variables:
     var hideErrorViewAfterDelayTimer: NSTimer?
     private var timeIntervalBeforeAutoHidingErrorView:NSTimeInterval = 10
-    var desiredHeight:CGFloat = 100
+    var minimumHeight:CGFloat = 100
 
     public init(parentView: UIView, autoHideDelaySeconds: Double,
         backgroundColor: UIColor,
         foregroundColor: UIColor,
-        desiredHeight: CGFloat,
-        positionBelowControl: UIView?)
+        minimumHeight: CGFloat,
+        positionBelowControl: UIView?,
+        font: UIFont?)
     {
         super.init()
         self.parentView = parentView
         timeIntervalBeforeAutoHidingErrorView = autoHideDelaySeconds
-        self.desiredHeight = desiredHeight
+        self.minimumHeight = minimumHeight
         self.positionBelowControl = positionBelowControl
-
+        self.font = font
         initSubviews()
+
         self.view.backgroundColor = backgroundColor
         self.errorMessageLabel.textColor = foregroundColor
         self.view.hidden = true
-
     }
 
     public func showErrorView(message: String)
@@ -100,7 +102,7 @@ public class ErrorView: NSObject
         self.view = UIView()
         parentView.addSubview(self.view)
 
-        self.errorMessageLabel = LabelWithAutoWrap(font: UIFont.systemFontOfSize(20))
+        self.errorMessageLabel = LabelWithAutoWrap(font: self.font)
         self.view.addSubview(errorMessageLabel)
 
         if let image = loadCloseButtonImage()
@@ -154,7 +156,7 @@ public class ErrorView: NSObject
         parentView.addConstraint(mainViewTopConstraint)
         self.mainViewTopSpaceConstraint = mainViewTopConstraint
 
-        let mainViewVConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: self.desiredHeight)
+        let mainViewVConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: self.minimumHeight)
 
         parentView.addConstraint(mainViewVConstraint)
 

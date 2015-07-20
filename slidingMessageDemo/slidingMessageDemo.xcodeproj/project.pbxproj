@@ -80,11 +80,7 @@
 		AB3DDEC61B5B34350075C9BF /* slidingMessageDemo */ = {
 			isa = PBXGroup;
 			children = (
-				AB3DDEC91B5B34350075C9BF /* AppDelegate.swift */,
 				AB3DDECB1B5B34350075C9BF /* ViewController.swift */,
-				AB3DDECD1B5B34350075C9BF /* Main.storyboard */,
-				AB3DDED01B5B34350075C9BF /* Images.xcassets */,
-				AB3DDED21B5B34350075C9BF /* LaunchScreen.xib */,
 				AB3DDEE91B5B35970075C9BF /* slidingmessage.framework */,
 				AB3DDEC71B5B34350075C9BF /* Supporting Files */,
 			);
@@ -94,6 +90,10 @@
 		AB3DDEC71B5B34350075C9BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AB3DDECD1B5B34350075C9BF /* Main.storyboard */,
+				AB3DDED01B5B34350075C9BF /* Images.xcassets */,
+				AB3DDED21B5B34350075C9BF /* LaunchScreen.xib */,
+				AB3DDEC91B5B34350075C9BF /* AppDelegate.swift */,
 				AB3DDEC81B5B34350075C9BF /* Info.plist */,
 			);
 			name = "Supporting Files";
