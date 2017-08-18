@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class ErrorView: NSObject
+open class ErrorView: NSObject
 {
     // Controls:
     var view: UIView!
@@ -23,8 +23,8 @@ public class ErrorView: NSObject
     var mainViewTopSpaceConstraint: NSLayoutConstraint!
 
     // Variables:
-    var hideErrorViewAfterDelayTimer: NSTimer?
-    private var timeIntervalBeforeAutoHidingErrorView:NSTimeInterval = 10
+    var hideErrorViewAfterDelayTimer: Timer?
+    fileprivate var timeIntervalBeforeAutoHidingErrorView:TimeInterval = 10
     var minimumHeight:CGFloat = 100
 
     public init(parentView: UIView, autoHideDelaySeconds: Double,
@@ -44,19 +44,17 @@ public class ErrorView: NSObject
 
         self.view.backgroundColor = backgroundColor
         self.errorMessageLabel.textColor = foregroundColor
-        self.view.hidden = true
+        self.view.isHidden = true
     }
 
-    public func showErrorView(message: String)
+    open func showErrorView(_ message: String)
     {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             self.stopErrorViewAutohideTimer()    // If it was already running, reset the autohide timer
-            var errView = self.view
-            errView.hidden = false
+            self.view.isHidden = false
 
             // Set text to the error message.
-            var errLabel = self.errorMessageLabel
-            errLabel.text = message
+            self.errorMessageLabel.text = message
 
             // Begin with message out of view, above the top edge of the parent view:
             self.parentView.layoutIfNeeded()
@@ -64,15 +62,15 @@ public class ErrorView: NSObject
             self.parentView.layoutIfNeeded()
 
             // Animate moving down from the top of the view:
-            UIView.animateWithDuration(0.8,
+            UIView.animate(
+                withDuration: 0.8,
                 delay: 0,
-                options: UIViewAnimationOptions.CurveEaseInOut |
-                    UIViewAnimationOptions.AllowUserInteraction,
+                options: [.curveEaseIn, .curveEaseOut, .allowUserInteraction],
                 animations: { () -> Void in
                     var topOfErrorView: CGFloat = 0
                     if let controlAbove = self.positionBelowControl
                     {
-                        let origin = self.parentView.convertPoint(controlAbove.bounds.origin, fromView: controlAbove)
+                        let origin = self.parentView.convert(controlAbove.bounds.origin, from: controlAbove)
                         let vspacing = ErrorView.getStandardVerticalSpacing(controlAbove, bottomControl: self.view)
                         topOfErrorView = origin.y + controlAbove.frame.size.height + vspacing
                     }
@@ -90,14 +88,18 @@ public class ErrorView: NSObject
         })
     }
 
-    public class func getStandardVerticalSpacing(topControl: UIView, bottomControl: UIView)->CGFloat
+    open class func getStandardVerticalSpacing(_ topControl: UIView, bottomControl: UIView)->CGFloat
     {
         let views = ["topview": topControl, "bottomview" : bottomControl]
-        let constraints = NSLayoutConstraint.constraintsWithVisualFormat("[topview]-[bottomview]", options: NSLayoutFormatOptions.allZeros, metrics: nil, views: views)
+        let constraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "[topview]-[bottomview]",
+            options: NSLayoutFormatOptions(),
+            metrics: nil,
+            views: views)
         return constraints[0].constant
     }
 
-    private func initSubviews()
+    fileprivate func initSubviews()
     {
         self.view = UIView()
         parentView.addSubview(self.view)
@@ -120,22 +122,22 @@ public class ErrorView: NSObject
         parentView.layoutIfNeeded()
     }
 
-    private func loadCloseButtonImage()->UIImage?
+    fileprivate func loadCloseButtonImage()->UIImage?
     {
-        let frameworkBundle = NSBundle(forClass: self.dynamicType)
-        return UIImage(named: "XButton", inBundle: frameworkBundle, compatibleWithTraitCollection: nil)
+        let frameworkBundle = Bundle(for: type(of: self))
+        return UIImage(named: "XButton", in: frameworkBundle, compatibleWith: nil)
     }
 
-    private func makeDismissButton()->UIButton
+    fileprivate func makeDismissButton()->UIButton
     {
-        var button = UIButton()
-        button.addTarget(self, action: "errorMessageDismissButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        let button = UIButton()
+        button.addTarget(self, action: #selector(ErrorView.errorMessageDismissButtonPressed(_:)), for: UIControlEvents.touchUpInside)
         return button
     }
 
-    private func setConstraints()
+    fileprivate func setConstraints()
     {
-        var views = [
+        let views: [String: UIView] = [
             "view": view,
             "label": errorMessageLabel,
             "image": imageView,
@@ -144,48 +146,48 @@ public class ErrorView: NSObject
 
         for control in views.values
         {
-            control.setTranslatesAutoresizingMaskIntoConstraints(false)
+            control.translatesAutoresizingMaskIntoConstraints = false
         }
 
-        var mainViewHConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.allZeros,
+        let mainViewHConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutFormatOptions(),
             metrics: nil, views: views)
         parentView.addConstraints(mainViewHConstraint)
 
 
-        var mainViewTopConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: parentView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0 /*32*/)
+        let mainViewTopConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: parentView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0 /*32*/)
         parentView.addConstraint(mainViewTopConstraint)
         self.mainViewTopSpaceConstraint = mainViewTopConstraint
 
-        let mainViewVConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: self.minimumHeight)
+        let mainViewVConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.minimumHeight)
 
         parentView.addConstraint(mainViewVConstraint)
 
-        let imageAspectRatioConstraint = NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: imageView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 1)
+        let imageAspectRatioConstraint = NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 1)
         imageView.addConstraint(imageAspectRatioConstraint)
 
-        let imageTopConstraint = NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let imageTopConstraint = NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
         view.addConstraint(imageTopConstraint)
 
-        let labelVertConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[label]-|",
-            options: NSLayoutFormatOptions.allZeros,
+        let labelVertConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label]-|",
+            options: NSLayoutFormatOptions(),
             metrics: nil, views: views)
         view.addConstraints(labelVertConstraints)
 
-        let subviewsHorzConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[image]-32.0-[label]-|",
-            options: NSLayoutFormatOptions.allZeros, metrics: nil, views: views)
+        let subviewsHorzConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[image]-32.0-[label]-|",
+            options: NSLayoutFormatOptions(), metrics: nil, views: views)
         view.addConstraints(subviewsHorzConstraints)
 
         // An invisible button overlays the entire control. Users will be drawn to tap the X button, but tapping anywhere will dismiss. The X button is just a cue to tell them it can be dismissed.
-        let buttonHorzConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[button]|",
-            options: NSLayoutFormatOptions.allZeros, metrics: nil, views: views)
+        let buttonHorzConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[button]|",
+            options: NSLayoutFormatOptions(), metrics: nil, views: views)
         view.addConstraints(buttonHorzConstraints)
 
-        let buttonVertConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[button]|",
-            options: NSLayoutFormatOptions.allZeros, metrics: nil, views: views)
+        let buttonVertConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[button]|",
+            options: NSLayoutFormatOptions(), metrics: nil, views: views)
         view.addConstraints(buttonVertConstraints)
     }
 
-    func errorMessageDismissButtonPressed(sender: UIButton!)
+    func errorMessageDismissButtonPressed(_ sender: UIButton!)
     {
         hideErrorView()
     }
@@ -195,15 +197,15 @@ public class ErrorView: NSObject
         if (timeIntervalBeforeAutoHidingErrorView > 0)
         {
             self.hideErrorViewAfterDelayTimer =
-                NSTimer.scheduledTimerWithTimeInterval(timeIntervalBeforeAutoHidingErrorView,
+                Timer.scheduledTimer(timeInterval: timeIntervalBeforeAutoHidingErrorView,
                     target: self,
-                    selector: "hideErrorViewTimerFired:",
+                    selector: #selector(ErrorView.hideErrorViewTimerFired(_:)),
                     userInfo: nil,
                     repeats: false)
         }
     }
 
-    @objc func hideErrorViewTimerFired(timer: NSTimer)
+    @objc func hideErrorViewTimerFired(_ timer: Timer)
     {
         stopErrorViewAutohideTimer()
         self.hideErrorView()
@@ -218,16 +220,16 @@ public class ErrorView: NSObject
     func hideErrorView()
     {
         stopErrorViewAutohideTimer()
-        UIView.animateWithDuration(0.3,
+        UIView.animate(withDuration: 0.3,
             delay: 0,
-            options: UIViewAnimationOptions.CurveEaseInOut,
+            options: UIViewAnimationOptions.curveEaseInOut,
 //            options: UIViewAnimationOptions.TransitionCrossDissolve,
             animations: { () -> Void in
                 //                self.mainViewTopSpaceConstraint.constant = -self.view.frame.size.height // Use this to slide up and away instead of fading out
                 self.view.alpha = 0
 //                self.view.layoutIfNeeded()
             }, completion: {(done)->Void in
-                self.view.hidden = true
+                self.view.isHidden = true
                 self.view.alpha = 1.0
         })
     }

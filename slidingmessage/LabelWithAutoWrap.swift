@@ -12,7 +12,7 @@ class LabelWithAutoWrap: UILabel
 {
     var userFont: UIFont?
 
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder:aDecoder)
         self.applyPropertySettings()
@@ -44,7 +44,7 @@ class LabelWithAutoWrap: UILabel
         self.preferredMaxLayoutWidth = self.bounds.size.width;
     }
 
-    private func applyFont()
+    fileprivate func applyFont()
     {
         if let fontToUse = self.userFont
         {
@@ -52,13 +52,13 @@ class LabelWithAutoWrap: UILabel
         }
         else
         {
-            self.font = UIFont.systemFontOfSize(15)
+            self.font = UIFont.systemFont(ofSize: 15)
         }
     }
 
-    private func applyPropertySettings()
+    fileprivate func applyPropertySettings()
     {
-        self.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.numberOfLines = 0
 
         applyFont()
