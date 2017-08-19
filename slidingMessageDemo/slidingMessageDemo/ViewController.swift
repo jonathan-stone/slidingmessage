@@ -15,23 +15,23 @@ class ViewController: UIViewController
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var button: UIButton!
 
-    private var errorView: slidingmessage.ErrorView?
+    fileprivate var errorView: slidingmessage.ErrorView?
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.errorView = ErrorView(parentView: self.view,
             autoHideDelaySeconds: 5,
-            backgroundColor: UIColor.redColor(),
-            foregroundColor: UIColor.whiteColor(),
+            backgroundColor: UIColor.red,
+            foregroundColor: UIColor.white,
             minimumHeight: 100,
             positionBelowControl: button,
-            font: UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
+            font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body))
     }
 
-    @IBAction func buttonPressed(sender: AnyObject)
+    @IBAction func buttonPressed(_ sender: AnyObject)
     {
-        self.errorView?.showErrorView(self.textField.text)
+        self.errorView?.showErrorView(self.textField.text!)
     }
 
     override func didReceiveMemoryWarning() {
