@@ -8,12 +8,16 @@
 
 import UIKit
 import XCTest
+import slidingmessage
 
 class slidingmessageTests: XCTestCase {
+
+    var theMessageControl: ErrorView?
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        theMessageControl = createSlidingMessage()
     }
     
     override func tearDown() {
@@ -24,6 +28,24 @@ class slidingmessageTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         XCTAssert(true, "Pass")
+    }
+
+    func createSlidingMessage()->ErrorView {
+        let slidingMessage = ErrorView(
+            parentView: UIView(),
+            autoHideDelaySeconds: 2,
+            backgroundColor: UIColor.red,
+            foregroundColor: UIColor.white,
+            minimumHeight: 200,
+            positionBelowControl: nil,
+            font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        )
+
+        return slidingMessage
+    }
+
+    func testCreateSlidingMessage() {
+        XCTAssert(theMessageControl != nil, "slidingMessage exists")
     }
     
     func testPerformanceExample() {
