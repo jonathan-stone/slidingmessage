@@ -1,5 +1,7 @@
 language: swift
 osx_image: xcode8.3
-xcode_project: slidingmessage/slidingmessage.xcproj
-xcode_scheme: slidingmessage
+# xcode_project: slidingmessage/slidingmessage.xcproj
+# xcode_scheme: slidingmessage
 xcode_sdk: iphonesimulator10.3
+script: — xcodebuild clean build -project slidingmessage/slidingmessage.xcproj -scheme slidingmessage -destination “platform=iOS Simulator,name=iPhone 7, OS=10.3” CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
