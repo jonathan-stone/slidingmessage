@@ -4,4 +4,4 @@ osx_image: xcode8.3
 # xcode_scheme: slidingmessage
 xcode_sdk: iphonesimulator10.3
 script:
- - xcodebuild clean build test -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' -project slidingmessage.xcodeproj -list
+ - xcodebuild clean build test -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' -project slidingmessage.xcodeproj -scheme slidingmessage CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
