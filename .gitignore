@@ -1,8 +1,15 @@
-*.xccheckout
-*.xccheckout
+# Always exclude files of type:
 *.xcbkptlist
-xcuserdata/
-*.xcodeproj/*
+*.xccheckout
+*.xcscmblueprint
+
+# Always exclude user data folder
+**/*.xcodeproj/xcuserdata/*
+
+# Always include these:
 !*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
+
+# Generated files:
+build/
+DerivedData/

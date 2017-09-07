@@ -13,6 +13,7 @@
 		AB3DDED11B5B34350075C9BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3DDED01B5B34350075C9BF /* Images.xcassets */; };
 		AB3DDED41B5B34350075C9BF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB3DDED21B5B34350075C9BF /* LaunchScreen.xib */; };
 		AB3DDEE01B5B34350075C9BF /* slidingMessageDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DDEDF1B5B34350075C9BF /* slidingMessageDemoTests.swift */; };
+		AB7D5E181F47955D000B2FBE /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = AB7D5E171F47955D000B2FBE /* .travis.yml */; };
 		AB9789CD1F46C42500987D40 /* slidingmessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9789CA1F46C2B700987D40 /* slidingmessage.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		AB3DDED91B5B34350075C9BF /* slidingMessageDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slidingMessageDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3DDEDE1B5B34350075C9BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3DDEDF1B5B34350075C9BF /* slidingMessageDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slidingMessageDemoTests.swift; sourceTree = "<group>"; };
+		AB7D5E171F47955D000B2FBE /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
 		AB9789C41F46C2B700987D40 /* slidingmessage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = slidingmessage.xcodeproj; path = ../slidingmessage.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 		AB3DDEBB1B5B34350075C9BF = {
 			isa = PBXGroup;
 			children = (
+				AB7D5E171F47955D000B2FBE /* .travis.yml */,
 				AB3DDEC61B5B34350075C9BF /* slidingMessageDemo */,
 				AB3DDEDC1B5B34350075C9BF /* slidingMessageDemoTests */,
 				AB3DDEC51B5B34350075C9BF /* Products */,
@@ -246,6 +249,7 @@
 			files = (
 				AB3DDECF1B5B34350075C9BF /* Main.storyboard in Resources */,
 				AB3DDED41B5B34350075C9BF /* LaunchScreen.xib in Resources */,
+				AB7D5E181F47955D000B2FBE /* .travis.yml in Resources */,
 				AB3DDED11B5B34350075C9BF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
