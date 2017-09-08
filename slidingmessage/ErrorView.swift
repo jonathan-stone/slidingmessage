@@ -225,7 +225,8 @@ open class ErrorView: NSObject
             options: UIViewAnimationOptions.curveEaseInOut,
 //            options: UIViewAnimationOptions.TransitionCrossDissolve,
             animations: { () -> Void in
-                //                self.mainViewTopSpaceConstraint.constant = -self.view.frame.size.height // Use this to slide up and away instead of fading out
+                // Use this to slide up and away instead of fading out:
+                //                self.mainViewTopSpaceConstraint.constant = -self.view.frame.size.height
                 self.view.alpha = 0
 //                self.view.layoutIfNeeded()
             }, completion: {(done)->Void in
