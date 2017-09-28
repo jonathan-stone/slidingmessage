@@ -7,14 +7,13 @@
 //
 
 import XCTest
-import slidingmessage
+@testable import slidingmessage
 
 class LabelWithAutowrapTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
     }
     
     override func tearDown() {
@@ -24,7 +23,9 @@ class LabelWithAutowrapTests: XCTestCase {
     
     func testExample() {
         let newLabel = LabelWithAutoWrap()
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let testText = "Test label text"
+        newLabel.text = testText
+        XCTAssertTrue(newLabel.text == testText)
     }
     
 }

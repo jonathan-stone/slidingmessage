@@ -68,7 +68,7 @@ open class ErrorView: NSObject
                 withDuration: 0.8,
                 delay: 0,
                 options: [.curveEaseIn, .curveEaseOut, .allowUserInteraction],
-                animations: animateSlidingDown,
+                animations: self.animateSlidingDown,
                 completion: { (done) -> Void in
                     self.startErrorViewAutohideTimer()
             })
@@ -206,7 +206,7 @@ open class ErrorView: NSObject
         view.addConstraints(buttonVertConstraints)
     }
 
-    func errorMessageDismissButtonPressed(_ sender: UIButton!)
+    @objc func errorMessageDismissButtonPressed(_ sender: UIButton!)
     {
         hideErrorView()
     }
@@ -215,12 +215,24 @@ open class ErrorView: NSObject
     {
         if (timeIntervalBeforeAutoHidingErrorView > 0)
         {
-            self.hideErrorViewAfterDelayTimer =
-                Timer.scheduledTimer(timeInterval: timeIntervalBeforeAutoHidingErrorView,
-                    target: self,
-                    selector: #selector(ErrorView.hideErrorViewTimerFired(_:)),
-                    userInfo: nil,
-                    repeats: false)
+            if #available(iOS 10.0, *) {
+                self.hideErrorViewAfterDelayTimer = Timer.scheduledTimer(
+                    withTimeInterval: timeIntervalBeforeAutoHidingErrorView,
+                    repeats: false,
+                    block: { (theTimer) in
+                        self.hideErrorViewTimerFired(theTimer)
+                    }
+                )
+            } else {
+                // Fallback on earlier versions
+                            self.hideErrorViewAfterDelayTimer = Timer.scheduledTimer(
+                                timeInterval: timeIntervalBeforeAutoHidingErrorView,
+                                target: self,
+                                selector: #selector(self.hideErrorViewTimerFired),
+                                userInfo: nil,
+                                repeats: false)
+
+            }
         }
     }
 
