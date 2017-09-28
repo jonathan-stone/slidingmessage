@@ -37,9 +37,11 @@ open class ErrorView: NSObject
         super.init()
         self.parentView = parentView
         timeIntervalBeforeAutoHidingErrorView = autoHideDelaySeconds
+
         self.minimumHeight = minimumHeight
         self.positionBelowControl = positionBelowControl
         self.font = font
+
         initSubviews()
 
         self.view.backgroundColor = backgroundColor
@@ -66,23 +68,8 @@ open class ErrorView: NSObject
                 withDuration: 0.8,
                 delay: 0,
                 options: [.curveEaseIn, .curveEaseOut, .allowUserInteraction],
-                animations: { () -> Void in
-                    var topOfErrorView: CGFloat = 0
-                    if let controlAbove = self.positionBelowControl
-                    {
-                        let origin = self.parentView.convert(controlAbove.bounds.origin, from: controlAbove)
-                        let vspacing = ErrorView.getStandardVerticalSpacing(controlAbove, bottomControl: self.view)
-                        topOfErrorView = origin.y + controlAbove.frame.size.height + vspacing
-                    }
-                    else
-                    {
-                        topOfErrorView = self.parentView.frame.height - self.view.frame.height
-                    }
-
-                    self.mainViewTopSpaceConstraint.constant = topOfErrorView
-                    self.parentView.layoutIfNeeded()
-
-                }, completion: { (done) -> Void in
+                animations: animateSlidingDown,
+                completion: { (done) -> Void in
                     self.startErrorViewAutohideTimer()
             })
         })
@@ -99,27 +86,59 @@ open class ErrorView: NSObject
         return constraints[0].constant
     }
 
+    fileprivate func animateSlidingDown()
+    {
+        var topOfErrorView: CGFloat = 0
+        if let controlAbove = self.positionBelowControl
+        {
+            let origin = self.parentView.convert(controlAbove.bounds.origin, from: controlAbove)
+            let vspacing = ErrorView.getStandardVerticalSpacing(controlAbove, bottomControl: self.view)
+            topOfErrorView = origin.y + controlAbove.frame.size.height + vspacing
+        }
+        else
+        {
+            topOfErrorView = self.parentView.frame.height - self.view.frame.height
+        }
+
+        self.mainViewTopSpaceConstraint.constant = topOfErrorView
+        self.parentView.layoutIfNeeded()
+    }
+
     fileprivate func initSubviews()
     {
         self.view = UIView()
         parentView.addSubview(self.view)
 
+        addMessageLabel()
+        addCloseButtonVisualHint()
+
+        // Button must be added last. Covers entire view.
+        addCloseButton()
+
+        // Add constraints
+        setConstraints()
+        parentView.layoutIfNeeded()
+    }
+
+    fileprivate func addMessageLabel()
+    {
         self.errorMessageLabel = LabelWithAutoWrap(font: self.font)
         self.view.addSubview(errorMessageLabel)
+    }
 
+    fileprivate func addCloseButtonVisualHint()
+    {
         if let image = loadCloseButtonImage()
         {
             self.imageView = UIImageView(image: image)
             self.view.addSubview(imageView)
         }
+    }
 
-        // Button must be added last. Covers entire view.
+    fileprivate func addCloseButton()
+    {
         self.errorMessageDismissButton = makeDismissButton()
         self.view.addSubview(errorMessageDismissButton)
-
-        // Add constraints
-        setConstraints()
-        parentView.layoutIfNeeded()
     }
 
     fileprivate func loadCloseButtonImage()->UIImage?

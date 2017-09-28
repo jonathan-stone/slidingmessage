@@ -44,6 +44,14 @@ class LabelWithAutoWrap: UILabel
         self.preferredMaxLayoutWidth = self.bounds.size.width;
     }
 
+    fileprivate func applyPropertySettings()
+    {
+        self.lineBreakMode = NSLineBreakMode.byWordWrapping
+        self.numberOfLines = 0
+
+        applyFont()
+    }
+
     fileprivate func applyFont()
     {
         if let fontToUse = self.userFont
@@ -56,11 +64,5 @@ class LabelWithAutoWrap: UILabel
         }
     }
 
-    fileprivate func applyPropertySettings()
-    {
-        self.lineBreakMode = NSLineBreakMode.byWordWrapping
-        self.numberOfLines = 0
 
-        applyFont()
-    }
 }
