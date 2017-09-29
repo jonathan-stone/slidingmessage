@@ -1,14 +1,13 @@
 //
-//  ErrorView.swift
-//  WhosInCustomerApp
+//  SlidingMessage.swift
 //
 //  Created by Jonathan Stone on 6/10/15.
-//  Copyright (c) 2015 Jonathan Stone. All rights reserved.
+//  Copyright (c) 2015-2017 Jonathan Stone. All rights reserved.
 //
 
 import UIKit
 
-open class ErrorView: NSObject
+open class SlidingMessage: NSObject
 {
     // Controls:
     var view: UIView!
@@ -23,8 +22,8 @@ open class ErrorView: NSObject
     var mainViewTopSpaceConstraint: NSLayoutConstraint!
 
     // Variables:
-    var hideErrorViewAfterDelayTimer: Timer?
-    fileprivate var timeIntervalBeforeAutoHidingErrorView:TimeInterval = 10
+    var hideSlidingMessageAfterDelayTimer: Timer?
+    fileprivate var timeIntervalBeforeAutoHiding:TimeInterval = 10
     var minimumHeight:CGFloat = 100
 
     public init(parentView: UIView, autoHideDelaySeconds: Double,
@@ -36,7 +35,7 @@ open class ErrorView: NSObject
     {
         super.init()
         self.parentView = parentView
-        timeIntervalBeforeAutoHidingErrorView = autoHideDelaySeconds
+        timeIntervalBeforeAutoHiding = autoHideDelaySeconds
 
         self.minimumHeight = minimumHeight
         self.positionBelowControl = positionBelowControl
@@ -49,10 +48,10 @@ open class ErrorView: NSObject
         self.view.isHidden = true
     }
 
-    open func showErrorView(_ message: String)
+    open func show(_ message: String)
     {
         DispatchQueue.main.async(execute: { () -> Void in
-            self.stopErrorViewAutohideTimer()    // If it was already running, reset the autohide timer
+            self.stopAutohideTimer()    // If it was already running, reset the autohide timer
             self.view.isHidden = false
 
             // Set text to the error message.
@@ -70,7 +69,7 @@ open class ErrorView: NSObject
                 options: [.curveEaseIn, .curveEaseOut, .allowUserInteraction],
                 animations: self.animateSlidingDown,
                 completion: { (done) -> Void in
-                    self.startErrorViewAutohideTimer()
+                    self.startAutohideTimer()
             })
         })
     }
@@ -88,19 +87,19 @@ open class ErrorView: NSObject
 
     fileprivate func animateSlidingDown()
     {
-        var topOfErrorView: CGFloat = 0
+        var topOfSlidingMessage: CGFloat = 0
         if let controlAbove = self.positionBelowControl
         {
             let origin = self.parentView.convert(controlAbove.bounds.origin, from: controlAbove)
-            let vspacing = ErrorView.getStandardVerticalSpacing(controlAbove, bottomControl: self.view)
-            topOfErrorView = origin.y + controlAbove.frame.size.height + vspacing
+            let vspacing = SlidingMessage.getStandardVerticalSpacing(controlAbove, bottomControl: self.view)
+            topOfSlidingMessage = origin.y + controlAbove.frame.size.height + vspacing
         }
         else
         {
-            topOfErrorView = self.parentView.frame.height - self.view.frame.height
+            topOfSlidingMessage = self.parentView.frame.height - self.view.frame.height
         }
 
-        self.mainViewTopSpaceConstraint.constant = topOfErrorView
+        self.mainViewTopSpaceConstraint.constant = topOfSlidingMessage
         self.parentView.layoutIfNeeded()
     }
 
@@ -150,7 +149,7 @@ open class ErrorView: NSObject
     fileprivate func makeDismissButton()->UIButton
     {
         let button = UIButton()
-        button.addTarget(self, action: #selector(ErrorView.errorMessageDismissButtonPressed(_:)), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(SlidingMessage.errorMessageDismissButtonPressed(_:)), for: UIControlEvents.touchUpInside)
         return button
     }
 
@@ -208,27 +207,27 @@ open class ErrorView: NSObject
 
     @objc func errorMessageDismissButtonPressed(_ sender: UIButton!)
     {
-        hideErrorView()
+        hide()
     }
 
-    func startErrorViewAutohideTimer()
+    func startAutohideTimer()
     {
-        if (timeIntervalBeforeAutoHidingErrorView > 0)
+        if (timeIntervalBeforeAutoHiding > 0)
         {
             if #available(iOS 10.0, *) {
-                self.hideErrorViewAfterDelayTimer = Timer.scheduledTimer(
-                    withTimeInterval: timeIntervalBeforeAutoHidingErrorView,
+                self.hideSlidingMessageAfterDelayTimer = Timer.scheduledTimer(
+                    withTimeInterval: timeIntervalBeforeAutoHiding,
                     repeats: false,
                     block: { (theTimer) in
-                        self.hideErrorViewTimerFired(theTimer)
+                        self.autoHideTimerFired(theTimer)
                     }
                 )
             } else {
                 // Fallback on earlier versions
-                            self.hideErrorViewAfterDelayTimer = Timer.scheduledTimer(
-                                timeInterval: timeIntervalBeforeAutoHidingErrorView,
+                            self.hideSlidingMessageAfterDelayTimer = Timer.scheduledTimer(
+                                timeInterval: timeIntervalBeforeAutoHiding,
                                 target: self,
-                                selector: #selector(self.hideErrorViewTimerFired),
+                                selector: #selector(self.autoHideTimerFired),
                                 userInfo: nil,
                                 repeats: false)
 
@@ -236,21 +235,21 @@ open class ErrorView: NSObject
         }
     }
 
-    @objc func hideErrorViewTimerFired(_ timer: Timer)
+    @objc func autoHideTimerFired(_ timer: Timer)
     {
-        stopErrorViewAutohideTimer()
-        self.hideErrorView()
+        stopAutohideTimer()
+        self.hide()
     }
 
-    func stopErrorViewAutohideTimer()
+    func stopAutohideTimer()
     {
-        self.hideErrorViewAfterDelayTimer?.invalidate()
-        self.hideErrorViewAfterDelayTimer = nil
+        self.hideSlidingMessageAfterDelayTimer?.invalidate()
+        self.hideSlidingMessageAfterDelayTimer = nil
     }
 
-    func hideErrorView()
+    func hide()
     {
-        stopErrorViewAutohideTimer()
+        stopAutohideTimer()
         UIView.animate(withDuration: 0.3,
             delay: 0,
             options: UIViewAnimationOptions.curveEaseInOut,

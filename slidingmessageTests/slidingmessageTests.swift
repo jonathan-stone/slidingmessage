@@ -12,7 +12,7 @@ import slidingmessage
 
 class slidingmessageTests: XCTestCase {
 
-    var theMessageControl: ErrorView?
+    var theMessageControl: SlidingMessage?
     
     override func setUp() {
         super.setUp()
@@ -30,8 +30,8 @@ class slidingmessageTests: XCTestCase {
         XCTAssert(true, "Pass")
     }
 
-    func createSlidingMessage()->ErrorView {
-        let slidingMessage = ErrorView(
+    func createSlidingMessage()->SlidingMessage {
+        let slidingMessage = SlidingMessage(
             parentView: UIView(),
             autoHideDelaySeconds: 2,
             backgroundColor: UIColor.red,
