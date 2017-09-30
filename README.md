@@ -35,3 +35,5 @@ self.errorNotification = SlidingMessage(
 }
 ```
 
+## Demo project
+Can be found in slidingMessageDemo.
