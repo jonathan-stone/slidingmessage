@@ -26,7 +26,9 @@ open class SlidingMessage: NSObject
     fileprivate var timeIntervalBeforeAutoHiding:TimeInterval = 10
     var minimumHeight:CGFloat = 100
 
-    public init(parentView: UIView, autoHideDelaySeconds: Double,
+    public init(
+        parentView: UIView,
+        autoHideDelaySeconds: Double,
         backgroundColor: UIColor,
         foregroundColor: UIColor,
         minimumHeight: CGFloat,
