@@ -7,6 +7,10 @@ slidingmessage is a simple message view that slides down from the top of its par
 - Tapping anywhere closes the view. An X graphic is included to give users the hint that they can close it.
 - Optionally closes automatically after N seconds.
 
+## Demo Video
+
+Here's the demo app in action. Note that you can change the color, the font, height, and of course the text content of the sliding message.
+
 ![Video Walkthrough](slidingMessageDemo/demo.gif)
 
 
