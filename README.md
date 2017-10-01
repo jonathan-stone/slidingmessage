@@ -3,11 +3,11 @@
 
 slidingmessage is a simple message view that slides down from the top of its parent. It's a way of displaying error messages or other important notifications in an iOS app, using an animation to draw the user's attention. It can be configured to slide down to just under any control in a view, for example, under a text field with invalid input.
 
-- Requires AutoLayout. 
+- Requires AutoLayout.
 - Tapping anywhere closes the view. An X graphic is included to give users the hint that they can close it.
 - Optionally closes automatically after N seconds.
 
-<img src='https://imgur.com/ZYK54ne' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![Video Walkthrough](slidingMessageDemo/demo.gif)
 
 
 ## Example usage:
