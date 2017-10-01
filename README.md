@@ -7,6 +7,8 @@ slidingmessage is a simple message view that slides down from the top of its par
 - Tapping anywhere closes the view. An X graphic is included to give users the hint that they can close it.
 - Optionally closes automatically after N seconds.
 
+<img src='https://imgur.com/ZYK54ne' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 ## Example usage:
 --------------
@@ -35,3 +37,5 @@ self.errorNotification = SlidingMessage(
 }
 ```
 
+## Demo project
+Can be found in slidingMessageDemo.
